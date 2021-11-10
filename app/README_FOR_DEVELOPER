@@ -1,0 +1,4 @@
+listview has getadapter
+
+adapter has getItem that may return a hashMap like <String, ?>
+and return a single row

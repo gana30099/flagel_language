@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout tools:context=".MainActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <FrameLayout
+        android:id="@+id/fragment_container_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.example.FragmentIpPlusPort"
+        />
+
+    <FrameLayout
+        android:id="@+id/fragment_container_view2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.example.FragmentAdd"
+        android:visibility="gone"
+        />
+
+    <!-- should be used to add in xml android:name="com.example.FragmentAdd"-->
+
+
+
+</LinearLayout>

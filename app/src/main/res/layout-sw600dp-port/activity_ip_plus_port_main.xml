@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout tools:context=".MainActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:weightSum="10">
+
+<!--    <EditText
+        android:id="@+id/ip_field"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="enter the ip adress here"
+        android:textSize="30dp"
+        android:textColor="#cbcbcb"
+        android:layout_weight="2"
+
+        />
+    <EditText
+        android:id="@+id/port_field"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="enter the port here"
+        android:textSize="30dp"
+        android:textColor="#cbcbcb"
+        android:layout_weight="2"
+
+        />
+
+    <ExpandableListView
+        android:id="@+id/ex_languages"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="horizontal"
+        android:layout_marginBottom="0dp">
+
+        <Button
+            android:id="@+id/connect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="connect"
+            android:text="Connect" />
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="goToNextActivity"
+            android:enabled="false"
+            android:text="Next" />
+        <Button
+            android:id="@+id/add2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="goToFragment"
+            android:enabled="false"
+            android:text="Add" />
+    </LinearLayout>-->
+
+    <FrameLayout
+        android:layout_weight="5"
+        android:id="@+id/fragment_container_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:name="com.example.FragmentIpPlusPort"
+        />
+
+    <FrameLayout
+        android:layout_weight="5"
+        android:id="@+id/fragment_container_view2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:name="com.example.FragmentAdd"
+         />
+
+    <!-- should be used to add in xml android:name="com.example.FragmentAdd"-->
+
+
+
+</LinearLayout>
