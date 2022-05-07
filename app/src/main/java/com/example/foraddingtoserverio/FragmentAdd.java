@@ -1,19 +1,22 @@
 package com.example.foraddingtoserverio;
 
-import androidx.fragment.app.Fragment;
-
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class FragmentAdd extends Fragment {
+import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class FragmentAdd extends AppCompatActivity {
     {
         
     }
+    JSONArray jsonArray = new JSONArray();
 
     public FragmentAdd() {
         super(R.layout.add_fragment);
@@ -23,52 +26,50 @@ public class FragmentAdd extends Fragment {
     maybe called by the activity and then failed
      */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        View v = null;
-        try {
-            v = inflater.inflate(R.layout.add_fragment, parent, false);
-        } catch (Exception e) {
-            Log.e("e", "onCreateView", e);
-        }
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.add_fragment);
 
-        return v;
+        setTitle("Expandable List View Example.");
 
-    }
+        Button b = (Button) findViewById(R.id.add);
 
-    // This event is triggered soon after onCreateView().
-    // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        // Setup any handles to view objects here
-        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
+        b.setOnClickListener(new View.OnClickListener() {
 
-
-        super.onViewCreated(view, savedInstanceState);
-        //getChildFragmentManager()
-
-        // todo see if it's wrong
-        //Button b = (Button) getActivity().findViewById(R.id.add);
-        //Button b = view.findViewById(R.id.add);
-        //Socket finalMySocket = mySocket;
-/*        b.setOnClickListener(new View.OnClickListener() {
-
-            EditText mother = (EditText) getActivity().findViewById(R.id.mother);
-            EditText other = (EditText) getActivity().findViewById(R.id.foreign);
+            EditText mother = (EditText) findViewById(R.id.mother);
+            EditText other = (EditText) findViewById(R.id.foreign);
 
             @Override
             public void onClick(View v) {
 
-                ((IpPlusPortMain)getActivity()).add_sentence(mother, other);
+
+                JSONObject jo = new JSONObject();
+
+                try {
+                    jo.put("mother", mother.getText().toString());
+                    jo.put("other", other.getText().toString());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                jsonArray.put(jo);
+
+
 
                 //((MainActivity) v.getContext()).makeText(mother.getText().toString());
                 // Write data to the output stream of the Client Socket.
             }
 
 
-        });*/
-
+        });
     }
 
+    public void goBack(View view) {
+        Intent intent = new Intent();
 
+        intent.putExtra("json", jsonArray.toString());
+        setResult(2, intent);
+        finish();
+    }
 }

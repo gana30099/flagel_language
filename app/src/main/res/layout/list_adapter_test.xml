@@ -49,7 +49,15 @@
         android:layout_height="wrap_content"
         android:onClick="myMethod"
         android:text="correction"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goBack"
+        android:text="Go back"
+        android:layout_weight="0.5"
         />
 
 </LinearLayout>

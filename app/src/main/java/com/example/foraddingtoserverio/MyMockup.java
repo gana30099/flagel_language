@@ -45,10 +45,10 @@ public class MyMockup {
             rootObject.put("sentences", ja);
             //ja = rootObject.getJSONArray("sentencces");
 
-            myObject.put("mother", "bonjour le monde");
+            myObject.put("mother", "bonjour le monde (mockup)");
             myObject.put("other", "hellow world");
 
-            myObject.put("mother", "salut");
+            myObject.put("mother", "salut (mockup)");
             myObject.put("other", "hi");
 
             ja.put(myObject);
@@ -79,7 +79,7 @@ public class MyMockup {
 
         try {
 
-            rootObject2.put("languages", ja2);
+            rootObject2.put("language", ja2);
 
             infosExtended.put("number", 2);
             infosExtended.put("note", 2);
@@ -106,6 +106,6 @@ public class MyMockup {
     }
 
     public JSONObject getMyLanguagesMockup() {
-        return mySentencesMockup;
+        return myLanguagesMockup;
     }
 }

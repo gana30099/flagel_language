@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
 /*
 Use recycler view to refresh the data in it
  */
@@ -79,12 +77,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     // Create new views (invoked by the layout manager)
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public CustomAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.list_view_items, viewGroup, false);
 
-        return new ViewHolder(view, new MyCustomEditTextListener());
+        return new CustomAdapter.ViewHolder(view, new MyCustomEditTextListener());
     }
 
     // Replace the contents of a view (invoked by the layout manager)

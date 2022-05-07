@@ -1,23 +1,23 @@
 package com.example.foraddingtoserverio;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 public class NumberOfSentencesActivity extends AppCompatActivity {
 
     String languageChoosen;
     String ip;
     int port;
-    JSONObject mJsonObject = null;
+    JSONArray mJsonObject = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +27,13 @@ public class NumberOfSentencesActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         JSONArray ja = null;
+        int l = 0;
         try {
-             mJsonObject = new JSONObject(getIntent().getStringExtra("json"));
-             ja = mJsonObject.getJSONArray("sentences");
+            String s = getIntent().getStringExtra("json");
+             mJsonObject = new JSONArray(s);
+             l = mJsonObject.length();
         } catch (JSONException e) {
+
             e.printStackTrace();
         }
 
@@ -46,12 +49,10 @@ public class NumberOfSentencesActivity extends AppCompatActivity {
         textView.setText(languageChoosen);
 
         TextView textView2 = findViewById(R.id.number_of_sentences_draw);
-        textView2.setText(ja.length());
+        //textView2.setText(l);
 
     }
-/*
-todo add port and ip
- */
+
     public void goToNextActivity(View view) {
 
         EditText ev = (EditText)findViewById(R.id.number_of_sentences);
@@ -59,16 +60,34 @@ todo add port and ip
         Intent intent = new Intent(this, MyListActivity.class);
 
         String numberOfSentencesChoosen = ev.getText().toString();
+        int choosen = Integer.parseInt(numberOfSentencesChoosen);
+
+        System.out.println("choosen : " + numberOfSentencesChoosen + " " + choosen);
 
         intent.putExtra("json", mJsonObject.toString());
-        intent.putExtra("number_of_sentences_choosen", numberOfSentencesChoosen);
+        intent.putExtra("number_of_sentences_choosen", choosen);
         intent.putExtra("language", languageChoosen);
 
         // TODO : change value below 8 to...
         intent.putExtra("number_of_sentences", 8);
 
 
-        startActivity(intent);
+        startActivityForResult(intent, 5);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        int note = data.getIntExtra("note", 0);
+        Intent intent = new Intent();
+        System.out.println("note number of sentences " + note);
+        intent.putExtra("note", note);
+
+        setResult(2, intent);
+
+        finish();
 
     }
 }
