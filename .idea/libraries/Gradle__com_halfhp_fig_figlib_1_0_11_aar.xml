@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.halfhp.fig:figlib:1.0.11@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c4bf5ee1ab76f5f6abdf91b3ed29caa8/jetified-figlib-1.0.11/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c4bf5ee1ab76f5f6abdf91b3ed29caa8/jetified-figlib-1.0.11/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c4bf5ee1ab76f5f6abdf91b3ed29caa8/jetified-figlib-1.0.11/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
