@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.urbanairship.android:urbanairship-layout:16.4.0@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/190249299218b966718c2d57cd8d49d0/jetified-urbanairship-layout-16.4.0/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/190249299218b966718c2d57cd8d49d0/jetified-urbanairship-layout-16.4.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/190249299218b966718c2d57cd8d49d0/jetified-urbanairship-layout-16.4.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/190249299218b966718c2d57cd8d49d0/jetified-urbanairship-layout-16.4.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.urbanairship.android/urbanairship-layout/16.4.0/809ac0806892aa7ca22fbc44319f4f202dd19c24/urbanairship-layout-16.4.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

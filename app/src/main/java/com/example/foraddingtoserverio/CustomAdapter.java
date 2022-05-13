@@ -24,7 +24,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     public CustomAdapter (Context context, String[] data, String[] data2) {
         this.mInflater = LayoutInflater.from(context);
         localDataSet = data;
-        localDataSet2 = data2;    }
+        localDataSet2 = data2;
+
+    }
 
 
     /**
@@ -91,6 +93,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
+        viewHolder.myCustomEditTextListener.updatePosition(viewHolder.getAdapterPosition());
         viewHolder.getTextViewMother().setText(localDataSet[position]);
         viewHolder.getTextViewHidden().setText(localDataSet2[position]);
         viewHolder.getEditTextEmpty().setText("");

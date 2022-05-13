@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.Random;
+
 public class NumberOfSentencesActivity extends AppCompatActivity {
 
     String languageChoosen;
@@ -31,6 +33,7 @@ public class NumberOfSentencesActivity extends AppCompatActivity {
         try {
             String s = getIntent().getStringExtra("json");
              mJsonObject = new JSONArray(s);
+             mJsonObject = shuffleJsonArray(mJsonObject);
              l = mJsonObject.length();
         } catch (JSONException e) {
 
@@ -56,11 +59,28 @@ public class NumberOfSentencesActivity extends AppCompatActivity {
     public void goToNextActivity(View view) {
 
         EditText ev = (EditText)findViewById(R.id.number_of_sentences);
+        String numberOfSentencesChoosen = ev.getText().toString();
+        int choosen = Integer.parseInt(numberOfSentencesChoosen);
+
+        if (choosen > mJsonObject.length()) {
+            TextView tv2 = (TextView)findViewById(R.id.max_to_fill);
+            tv2.setText("number is to big (max : " + mJsonObject.length() + ")");
+            return;
+        }
+
+        /* get number_of_sentences first json */
+        JSONArray jsonArray = new JSONArray();
+        for (int i=0; i<choosen; i++) {
+            try {
+                jsonArray.put(i, mJsonObject.get(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
         Intent intent = new Intent(this, MyListActivity.class);
 
-        String numberOfSentencesChoosen = ev.getText().toString();
-        int choosen = Integer.parseInt(numberOfSentencesChoosen);
+
 
         System.out.println("choosen : " + numberOfSentencesChoosen + " " + choosen);
 
@@ -80,14 +100,34 @@ public class NumberOfSentencesActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        int note = data.getIntExtra("note", 0);
-        Intent intent = new Intent();
-        System.out.println("note number of sentences " + note);
-        intent.putExtra("note", note);
+        //int note = data.getIntExtra("note", 0);
+        if (data != null) {
+            double note = data.getDoubleExtra("note", 0);
+            Intent intent = new Intent();
+            System.out.println("note number of sentences " + note);
+            intent.putExtra("note", note);
 
-        setResult(2, intent);
+            setResult(2, intent);
+
+        }
+
+        setResult(3);
 
         finish();
 
+    }
+
+    public static JSONArray shuffleJsonArray (JSONArray array) throws JSONException {
+        // Implementing Fisher–Yates shuffle
+        Random rnd = new Random();
+        for (int i = array.length() - 1; i >= 0; i--)
+        {
+            int j = rnd.nextInt(i + 1);
+            // Simple swap
+            Object object = array.get(j);
+            array.put(j, array.get(i));
+            array.put(i, object);
+        }
+        return array;
     }
 }

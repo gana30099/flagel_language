@@ -1,5 +1,8 @@
 package com.example.foraddingtoserverio;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.database.DataSetObserver;
@@ -218,6 +221,8 @@ public class MainActivity2 extends AppCompatActivity  {
                         break;
                 }
 
+                json(selectedLanguage);
+
 
                 /*int index = selectedLanguage.indexOf("English");
                 if (index != -1) {
@@ -266,8 +271,42 @@ public class MainActivity2 extends AppCompatActivity  {
         setContentView(R.layout.activity_ip_plus_port_main);
 
         setTitle("Languages");
+/*        AirshipConfigOptions config = AirshipConfigOptions.newBuilder();
 
-        try {
+// Set any custom values
+        config.developmentAppKey = "DEV APP KEY"
+        config.developmentAppSecret = "DEV APP SECRET"
+        UAirship.takeOff();
+        */
+
+        /*
+
+         */
+        Notification.Builder builder = new Notification.Builder(this, NotificationChannel.EDIT_CONVERSATION)
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setContentTitle("hi")
+                .setContentText("how are you?")
+                .setPriority(Notification.PRIORITY_HIGH);
+
+        Notification not = builder.build();
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(NotificationChannel.EDIT_CONVERSATION, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+            boolean boolean1 = notificationManager.areNotificationsEnabled();
+            notificationManager.notify(1, not);
+
+        }
+
+            try {
             String prop = getProperty();
             System.out.println(prop);
             mySocket = IO.socket(prop);
@@ -275,6 +314,8 @@ public class MainActivity2 extends AppCompatActivity  {
             MainActivity2 t = this;
 
             mySocket.emit("lobby", "");
+            
+            //json();
 
             t.addLanguageInfo("Spanish", 5, 10);
 
@@ -437,10 +478,16 @@ public class MainActivity2 extends AppCompatActivity  {
 
 
         } else if (requestCode == 4) {  // todo return the note
-            int note;
-            System.out.println(note = data.getIntExtra("note", 0));
-            System.out.println("--------note---------" + note);
-            mySocket.emit("put_note", selectedLanguage + " " + note);
+            if (resultCode == 2) {
+                // data => => <=
+                double note;
+                System.out.println(note = data.getDoubleExtra("note", 0));
+                System.out.println("--------note---------" + note);
+                mySocket.emit("put_note", selectedLanguage + " " + note);
+            } else {
+                // no data => <=
+                System.out.println("no data => <=");
+            }
         }
 
 
@@ -479,10 +526,10 @@ public class MainActivity2 extends AppCompatActivity  {
         Intent intent = new Intent(this, FragmentAdd.class);
 
         // todo replace the mokup
-        //intent.putExtra("language", selectedLanguage);
-        //intent.putExtra("json", MyMockup.getInstance().getMyLanguagesMockup().toString());
+        intent.putExtra("language", selectedLanguage);
+        intent.putExtra("json", MyMockup.getInstance().getMyLanguagesMockup().toString());
 
-        //intent.putExtra("json", jObject.toString());
+        intent.putExtra("json", jObject.toString());
 
         startActivityForResult(intent, 1);
 
@@ -543,7 +590,8 @@ public class MainActivity2 extends AppCompatActivity  {
     private final Object monitor = new Object();
     private boolean ready = false;
 
-    private void json() {
+    /* contient emit */
+    private void json(String selected) {
 
 //        Object syntocken = new Object();
 //        DataCreator dataCreator = new DataCreator(syntocken, this);
@@ -555,7 +603,7 @@ public class MainActivity2 extends AppCompatActivity  {
 
 
 
-        mySocket.emit("Language", selectedLanguage);
+        mySocket.emit("Language", selected);
 
         mySocket.on("json_all_included", new Emitter.Listener() {
             @Override

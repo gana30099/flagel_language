@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.urbanairship.android:urbanairship-automation:16.4.0@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d61f578f3dca93111a6bc8ef2b988bc1/jetified-urbanairship-automation-16.4.0/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d61f578f3dca93111a6bc8ef2b988bc1/jetified-urbanairship-automation-16.4.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d61f578f3dca93111a6bc8ef2b988bc1/jetified-urbanairship-automation-16.4.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d61f578f3dca93111a6bc8ef2b988bc1/jetified-urbanairship-automation-16.4.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.urbanairship.android/urbanairship-automation/16.4.0/e8658a1191126c32e938cc5b61a563bb4589f438/urbanairship-automation-16.4.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

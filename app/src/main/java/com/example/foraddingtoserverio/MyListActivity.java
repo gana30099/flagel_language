@@ -59,9 +59,22 @@ public class MyListActivity extends AppCompatActivity {
         // set up the RecyclerView
         recyclerView = findViewById(R.id.simpleListView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // todo delete following line and do with Custom adapter
+        recyclerView.setItemViewCacheSize(mothers.length * 3);
         adapter = new CustomAdapter(this, mothers, hidden);
         //adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     public void myMethod(View view)  {
