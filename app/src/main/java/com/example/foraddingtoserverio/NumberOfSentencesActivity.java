@@ -56,6 +56,7 @@ public class NumberOfSentencesActivity extends AppCompatActivity {
 
     }
 
+
     public void goToNextActivity(View view) {
 
         EditText ev = (EditText)findViewById(R.id.number_of_sentences);

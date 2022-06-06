@@ -1,14 +1,15 @@
 package com.example.foraddingtoserverio;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.res.AssetManager;
 import android.database.DataSetObserver;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,28 @@ public class MainActivity2 extends AppCompatActivity  {
     String selectedLanguage = "English";
     JSONArray jObject = null;
     Socket mySocket;
+
+    NotificationService m_service;
     //MyMockup myMockup = new MyMockup();
+
+    private ServiceConnection m_serviceConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            m_service = ((NotificationService.LocalBinder)service).getService();
+        }
+
+        public void onServiceDisconnected(ComponentName className) {
+            m_service = null;
+        }
+    };
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = new Intent(this, NotificationService.class);
+        bindService(intent, m_serviceConnection, Context.BIND_AUTO_CREATE);
+
+    }
+
 
     public void setExpendable() {
         ExpandableListAdapter expandableListAdapter = new ExpandableListAdapter() {
@@ -266,6 +288,16 @@ public class MainActivity2 extends AppCompatActivity  {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+
+        Intent intent = new Intent(this, NotificationService.class);
+
+        startService(intent);
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ip_plus_port_main);
@@ -280,9 +312,7 @@ public class MainActivity2 extends AppCompatActivity  {
         */
 
         /*
-
-         */
-        Notification.Builder builder = new Notification.Builder(this, NotificationChannel.EDIT_CONVERSATION)
+Notification.Builder builder = new Notification.Builder(this, NotificationChannel.EDIT_CONVERSATION)
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .setContentTitle("hi")
                 .setContentText("how are you?")
@@ -305,6 +335,8 @@ public class MainActivity2 extends AppCompatActivity  {
             notificationManager.notify(1, not);
 
         }
+         */
+
 
             try {
             String prop = getProperty();
@@ -459,7 +491,7 @@ public class MainActivity2 extends AppCompatActivity  {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
+        if (requestCode == 1 && data != null) {
             String s1 = data.getStringExtra("json");
             try {
                 JSONArray ja = new JSONArray(s1);
